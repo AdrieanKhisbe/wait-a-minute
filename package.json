@@ -1,0 +1,34 @@
+{
+  "name": "wait-a-minute",
+  "version": "0.0.1",
+  "description": "Temporise your command, for a minute or so",
+  "author": "Adriean Khisbe <adriean.khisbe@live.fr> (https://github.com/AdrieanKhisbe/)",
+  "license": "MIT",
+  "keywords": [
+    "wait",
+    "shell",
+    "cli"
+  ],
+  "main": "src/index.js",
+  "files": [
+    "bin",
+    "src"
+  ],
+  "homepage": "https://github.com/AdrieanKhisbe/wait-a-minute#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrieanKhisbe/wait-a-minute.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AdrieanKhisbe/wait-a-minute/issues"
+  },
+  "bin": {
+    "wait-a-minute": "./bin/wait-a-minute"
+  },
+  "scripts": {},
+  "engines": {
+    "node": ">=12.18.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
