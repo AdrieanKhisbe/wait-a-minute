@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - '10'
+  - '12'
+  - '14'
+  - '16'
+cache: npm
+
+install:
+  - npm install
+
+after_script:
+  - npm run publish-coverage
+
+script:
+  - npm test

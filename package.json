@@ -25,10 +25,22 @@
   "bin": {
     "wait-a-minute": "./bin/wait-a-minute"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "ava",
+    "publish-coverage": "codecov"
+  },
   "engines": {
     "node": ">=12.18.0"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "codecov": "^3.8.1",
+    "nyc": "^15.1.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ]
+  }
 }
