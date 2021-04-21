@@ -26,7 +26,9 @@
     "wait-a-minute": "./bin/wait-a-minute"
   },
   "scripts": {
-    "test": "ava",
+    "lint": "eslint src bin/wait-a-minute test",
+    "test:unit": "ava",
+    "test": "npm run lint && nyc npm run test:unit",
     "publish-coverage": "codecov"
   },
   "engines": {
@@ -34,8 +36,10 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@-k/eslint-plugin": "^0.4.1",
     "ava": "^3.15.0",
     "codecov": "^3.8.1",
+    "eslint": "^7.24.0",
     "nyc": "^15.1.0"
   },
   "ava": {
