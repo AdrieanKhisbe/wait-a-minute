@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-const {execSync} = require('child_process'); // tmp
-// const {main} = require('../src');
+const {main} = require('../src');
 
 console.log("Ctrl-D when you're okay");
-execSync('cat', {shell: true, stdio: 'inherit'});
+main(process);
