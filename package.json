@@ -1,6 +1,6 @@
 {
   "name": "wait-a-minute",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Temporise your command, for a minute or so",
   "author": "Adriean Khisbe <adriean.khisbe@live.fr> (https://github.com/AdrieanKhisbe/)",
   "license": "MIT",
