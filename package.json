@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "chalk": "^4.1.1",
-    "ora": "^5.4.1"
+    "ora": "^5.4.1",
+    "yargs": "^17.0.1"
   },
   "devDependencies": {
     "@-k/eslint-plugin": "^0.4.2",
