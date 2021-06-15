@@ -36,10 +36,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@-k/eslint-plugin": "^0.4.1",
+    "@-k/eslint-plugin": "^0.4.2",
     "ava": "^3.15.0",
-    "codecov": "^3.8.1",
-    "eslint": "^7.24.0",
+    "codecov": "^3.8.2",
+    "eslint": "^7.28.0",
     "nyc": "^15.1.0"
   },
   "ava": {
