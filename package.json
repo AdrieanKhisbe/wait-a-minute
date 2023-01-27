@@ -39,6 +39,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "ora": "^5.4.1",
+    "p-defer": "^3.0.0",
     "yargs": "^17.0.1"
   },
   "devDependencies": {

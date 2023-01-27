@@ -3,7 +3,7 @@ const ora = require('ora');
 const c = require('chalk');
 const _ = require('lodash/fp');
 const yargs = require('yargs/yargs');
-const {toMillis} = require('./utils');
+const {TimeWaiter} = require('./waiters');
 
 const TYPES = ['duration', 'when', 'confirm', 'signal'];
 
@@ -19,13 +19,6 @@ const setConfirm = cb => {
   // TODO: validate word? (combine with once)
 
   rl.on('close', () => cb('confirm'));
-};
-
-const setDuration = (spinner, duration, cb) => {
-  const delay = toMillis(String(duration));
-  setTimeout(cb, delay, 'timeout');
-  // TODO maybe, pause?
-  // TODO: maybe interval update
 };
 
 const setSignal = async (spinner, process, cb) => {
@@ -56,24 +49,33 @@ const argsParser = yargs().options({
 
 // TODO: NOW, get text, type, param parser
 const getSpinner = args => {
-  return ora({
-    text:
-      `Awaiting for ${c.bold[args.color]('confirmation')} ` +
-      `(${c.dim('Ctrl-D')}) to release focus:`,
-    isEnabled: args.spinner,
-    color: args.color
-  });
+  return 
 };
 
 const main = async process => {
   const args = argsParser.parse(process.argv.slice(2));
 
-  const spinner = getSpinner(args).start();
-  const complete = reason =>
-    spinner.succeed(
-      `Wait is now ${c.bold[args.color]('over!')} (reason ${c.dim[args.color](reason)})`
-    );
+  const waiter = new TimeWaiter({args}, args._[0]);
+  /*
+  `Awaiting for ${c.bold[args.color]('confirmation')} ` +
+      `(${c.dim('Ctrl-D')}) to release focus:`,
+  */
+  const spinner = ora({
+    text: waiter.message,
+    isEnabled: args.spinner,
+    color: args.color
+  }).start();
+  // TODO: spinner in context?
+  waiter.start();
 
+  // TODO: try race
+  await waiter.promise; // TODO: maybe startAndWait
+  spinner.succeed(
+    waiter.completionMessage
+    /*`Wait is now ${c.bold[args.color]('over!')} (reason ${c.dim[args.color](waiter.type)})`*/
+  );
+
+  return;
   if (args.signal) {
     process.stdin.resume();
     return setSignal(spinner, process, complete);
