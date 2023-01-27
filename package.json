@@ -32,7 +32,7 @@
     "publish-coverage": "codecov"
   },
   "engines": {
-    "node": ">=12.18.0"
+    "node": ">=16.16"
   },
   "dependencies": {
     "chalk": "^4.1.1",
