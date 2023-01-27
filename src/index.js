@@ -32,14 +32,20 @@ const argsParser = yargs().options({
   spinner: {
     type: 'boolean',
     default: true
+  },
+  color: {
+    default: 'green'
   }
 });
 
 // TODO: NOW, get text, type, param parser
 const getSpinner = args => {
   return ora({
-    text: `Awaiting for ${c.bold.green('confirmation')} (${c.dim('Ctrl-D')}) to release focus:`,
-    isEnabled: args.spinner
+    text:
+      `Awaiting for ${c.bold[args.color]('confirmation')} ` +
+      `(${c.dim('Ctrl-D')}) to release focus:`,
+    isEnabled: args.spinner,
+    color: args.color
   });
 };
 
@@ -47,8 +53,10 @@ const main = async process => {
   const args = argsParser.parse(process.argv.slice(2));
 
   const spinner = getSpinner(args).start();
-  if (_.isEmpty(args._)) setConfirm(() => spinner.succeed(`Wait is now ${c.bold('over')}!`));
-  else setDuration(spinner, args._[0], () => spinner.succeed(`Wait is now ${c.bold('over')}!`));
+  const complete = () => spinner.succeed(`Wait is now ${c.bold[args.color]('over')}!`);
+
+  if (_.isEmpty(args._)) setConfirm(complete);
+  else setDuration(spinner, args._[0], complete);
 };
 
 module.exports = {main};
