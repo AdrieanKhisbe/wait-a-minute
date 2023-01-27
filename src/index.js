@@ -2,7 +2,7 @@ const readline = require('readline');
 const ora = require('ora');
 const c = require('chalk');
 const yargs = require('yargs/yargs');
-const {fakeSpinner} = require('./utils');
+// const {} = require('./utils');
 
 const argsParser = yargs().option('spinner', {
   type: 'boolean',
@@ -17,14 +17,13 @@ const main = async process => {
   });
   const args = argsParser.parse(process.argv.slice(2));
 
-  const spinner = args.spinner
-    ? ora(
-        `Awaiting for ${c.bold.green('confirmation')} (${c.dim('Ctrl-D')}) to release focus`
-      ).start()
-    : fakeSpinner;
+  const spinner = ora({
+    text: `Awaiting for ${c.bold.green('confirmation')} (${c.dim('Ctrl-D')}) to release focus`,
+    isEnabled: args.spinner
+  }).start();
 
   rl.on('line', line => {
-    // noop
+    // noop (so far)
   });
 
   rl.on('close', () => {
