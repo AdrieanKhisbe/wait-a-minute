@@ -34,7 +34,7 @@ class TimeWaiter extends Waiter {
   }
 
   start() {
-    this.timer = setTimeout(this.deferred.resolve, this.duration);
+    this.timer = setTimeout(this.deferred.resolve, this.duration.asMilliseconds());
     return this;
   }
   cancel() {
@@ -92,15 +92,16 @@ class SignalWaiter extends Waiter {
 
   start() {
     // TODO: pid could be write to file. (and eventual scope/alias be provided)
-    this.process.on(this.signal, this.deferred.resolve);
+    this.listener = this.process.on(this.signal, this.deferred.resolve);
     // TODO: maybe also handle the SIGABRT for more gracely shut dowb
     return this;
   }
   cancel() {
-    clearTimeout(this.timer);
+    clearTimeout(this.process.removeListener(this.listener));
   }
 }
-// TODO HourWaiter 🚩
+// TODO HourWaiter  🚩
+// TODO PointInTimeWaiter 🕰️ 🚩
 
 const getWaiter = args => {
   const context = {process};
