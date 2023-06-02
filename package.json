@@ -26,6 +26,7 @@
     "wait-a-minute": "./bin/wait-a-minute"
   },
   "scripts": {
+    "start": "node bin/wait-a-minute",
     "lint": "eslint src bin/wait-a-minute test",
     "test:unit": "ava",
     "test": "npm run lint && nyc npm run test:unit",
