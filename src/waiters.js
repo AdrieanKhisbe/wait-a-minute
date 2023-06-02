@@ -102,6 +102,7 @@ class SignalWaiter extends Waiter {
 }
 // TODO HourWaiter  🚩
 // TODO PointInTimeWaiter 🕰️ 🚩
+// TODO ProcessWaiter 👀 🚩 (wait existing process (pid or name))
 
 const getWaiter = args => {
   const context = {process};
