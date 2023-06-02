@@ -16,6 +16,7 @@ class Waiter {
   pause() {
     throw new Error("Method 'pause()' must be implemented.");
   }
+  // 💡 ? maybe add a help like command (for ? input)
 }
 
 class TimeWaiter extends Waiter {
@@ -79,10 +80,11 @@ class SignalWaiter extends Waiter {
   constructor(context, args) {
     super(context, args);
     this.type = 'signal';
-    this.signal = 'SIGUSR2'; // TODO: configurable
+    this.signal = 'SIGUSR2'; // TODO: maybe make it configurable to other signal
   }
   get message() {
     return `☎️ Signal ${c.dim(this.signal)} to ${c.bold(this.process.pid)} to pursue`;
+    // TODO: maybe output the kill -s SIGUSR2 command to run (or the wam helper)
   }
   get completionMessage() {
     return `📞 Signal ${c.dim(this.signal)} received! 🏁`;
@@ -91,20 +93,21 @@ class SignalWaiter extends Waiter {
   start() {
     // TODO: pid could be write to file. (and eventual scope/alias be provided)
     this.process.on(this.signal, this.deferred.resolve);
+    // TODO: maybe also handle the SIGABRT for more gracely shut dowb
     return this;
   }
   cancel() {
     clearTimeout(this.timer);
   }
 }
+// TODO HourWaiter 🚩
+
 const getWaiter = args => {
   const context = {process};
   if (args.signal) return new SignalWaiter(context, args);
   return args._[0] ? new TimeWaiter(context, args) : new ConfirmationWaiter(context, args);
   // TODO: better logic
 };
-
-// hourWaiter
 
 // Combiner?
 module.exports = {TimeWaiter, ConfirmationWaiter, SignalWaiter, getWaiter};
